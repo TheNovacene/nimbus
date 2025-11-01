@@ -4,6 +4,6 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/nimbus/',              // 👈 important for GitHub Pages
+  base: '/nimbus/',  // IMPORTANT: must match repo name exactly
   resolve: { alias: { '@': path.resolve(__dirname, './src') } }
 })
