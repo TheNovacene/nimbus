@@ -60,6 +60,84 @@
       .nimbus-legend .dot {
         display:inline-block; width:12px; height:12px; border-radius:9999px;
       }
+      /* ==== Nimbus “Pro Dashboard” polish ==================================== */
+
+/* 1) Glass cards: target the big rounded containers the app renders */
+.rounded-xl,
+.bg-slate-900\/60,
+.bg-slate-900\/70,
+.bg-slate-900\/80 {
+  background: rgba(8, 13, 24, 0.72) !important;   /* deep glass */
+  border-color: rgba(148, 163, 184, 0.20) !important; /* subtle line */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 10px 30px rgba(3, 7, 18, 0.55),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+/* Small cards (metric tiles) – a touch more depth */
+.card,
+[class*="CardContent"] {
+  background: rgba(10, 16, 28, 0.78);
+  border: 1px solid rgba(148,163,184,0.18);
+  box-shadow: 0 6px 16px rgba(2, 6, 23, 0.45);
+}
+
+/* 2) Atlas: node glow + hover and calm pulse */
+svg circle {
+  transition: transform .25s ease, filter .25s ease, opacity .25s ease;
+}
+
+/* Hover: gently lift the node */
+svg g:hover circle:first-of-type {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 10px rgba(34,211,238,.55));
+}
+
+/* Calm nodes (cyan fill) get a slow pulse */
+svg circle[fill="#36D0C4"] {
+  animation: nimbusPulse 3s ease-in-out infinite;
+}
+@keyframes nimbusPulse {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(54,208,196,0)); }
+  50%      { filter: drop-shadow(0 0 12px rgba(54,208,196,.55)); }
+}
+
+/* 3) Typography: make dashboard text clearer */
+h1 { font-weight: 500; letter-spacing: .3px; }
+h2 { font-weight: 500; letter-spacing: .25px; }
+h3 { font-weight: 500; letter-spacing: .2px; }
+
+/* Lift subtle text everywhere (pairs with the earlier slate overrides) */
+.small, .text-xs { font-size: 12.5px !important; }
+.text-sm { font-size: 14.5px !important; }
+
+/* Ensure SVG label size is readable on all screens */
+svg { font-size: 13px; }
+
+/* 4) Mobile tuning */
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  h1   { font-size: 22px !important; }
+  h2   { font-size: 18px !important; }
+  .nimbus-legend { font-size: 12.5px; gap: 10px; }
+
+  /* Compress Atlas margins a touch for small screens */
+  .rounded-xl { padding: 14px !important; }
+}
+
+/* 5) Divider polish for the details panel */
+hr, .border-t {
+  border-top-color: rgba(148,163,184,0.18) !important;
+  opacity: 1;
+}
+
+/* 6) Buttons: make outlines visible on dark */
+button, .btn, [class*="button"] {
+  border-color: rgba(148,163,184,0.28) !important;
+}
+
     </style>
   </head>
 
