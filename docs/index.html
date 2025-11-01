@@ -91,5 +91,76 @@
     <div id="root"></div>
 
     <!-- Vite dev entry (Vite rewrites this during build) -->
+    <style>
+  /* Make all Tailwind slate text lighter on dark */
+  [class*="text-slate-"] { color: #cbd5e1 !important; }   /* slate-300 */
+  .text-slate-200, .text-slate-50 { color: #e6edf3 !important; }
+
+  /* Headings look like a dashboard, not washed out */
+  h1, h2, h3 { color: #e6edf3 !important; letter-spacing: .2px; }
+
+  /* Ensure small legend text is readable and spaced */
+  .nimbus-legend { 
+    display: flex; flex-wrap: wrap; gap: 12px; 
+    color: #cbd5e1; font-size: 12px; margin-top: 12px;
+  }
+  .nimbus-legend .dot { 
+    display:inline-block; width:12px; height:12px; border-radius:9999px; 
+  }
+
+  /* Extra safety: SVG labels already have a halo, keep their fill bright */
+  svg text { fill: #f8fafc; }
+</style>
+<script>
+  (function enhanceNimbusLegend() {
+    function findAtlasBox(root) {
+      // Find the title that includes "symbolic propagation map"
+      const title = Array.from(root.querySelectorAll('div,span'))
+        .find(el => /symbolic propagation map/i.test(el.textContent || ''));
+      if (!title) return null;
+      // The atlas container is the next big rounded box after the title row
+      const section = title.closest('div');
+      if (!section) return null;
+      // Heuristic: the next sibling with a big rounded container holds the SVG
+      let next = section.nextElementSibling;
+      while (next && !/rounded/i.test(next.className)) next = next.nextElementSibling;
+      return next || section.nextElementSibling;
+    }
+
+    function patch() {
+      const root = document.getElementById('root');
+      if (!root) return setTimeout(patch, 200);
+
+      const atlasBox = findAtlasBox(root);
+      if (!atlasBox) return setTimeout(patch, 200);
+
+      // Hide any existing legend row that mentions "Link thickness"
+      Array.from(root.querySelectorAll('div'))
+        .filter(el => /Link thickness/i.test(el.textContent || ''))
+        .forEach(el => (el.style.display = 'none'));
+
+      // Inject our clean legend just after the atlas box
+      if (!atlasBox.nextElementSibling || !atlasBox.nextElementSibling.classList.contains('nimbus-legend')) {
+        const legend = document.createElement('div');
+        legend.className = 'nimbus-legend';
+        legend.innerHTML = `
+          <div class="flex items-center gap-2"><span class="dot" style="background:#36D0C4"></span> Calm (≥85)</div>
+          <div class="flex items-center gap-2"><span class="dot" style="background:#E5B769"></span> Variable (70–84)</div>
+          <div class="flex items-center gap-2"><span class="dot" style="background:#F87171"></span> Storm (&lt;70)</div>
+          <div class="flex items-center gap-2"><span style="display:inline-block;width:24px;height:2px;background:#cbd5e1"></span> Link thickness = symbolic mass</div>
+        `;
+        atlasBox.parentNode.insertBefore(legend, atlasBox.nextSibling);
+      }
+    }
+
+    // Retry a few times until React has mounted
+    let tries = 0;
+    (function loop() {
+      patch();
+      if (++tries < 30) setTimeout(loop, 150);
+    })();
+  })();
+</script>
+
   </body>
 </html>
