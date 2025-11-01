@@ -2,12 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base look + safety net for Pages */
+/* Baseline Nimbus look (also used by components) */
 @layer base {
-  html, body, #root {
-    @apply bg-slate-950 text-slate-50 min-h-screen;
-  }
-  body {
-    @apply antialiased;
-  }
+  html, body, #root { @apply min-h-screen; }
+  body { @apply bg-slate-950 text-slate-50 antialiased; }
 }
