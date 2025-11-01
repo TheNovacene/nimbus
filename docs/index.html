@@ -48,4 +48,84 @@
     }
 
     /* Lift slate text shades (Tailwind) */
-    [class*="text-slate-"] { color: #cbd5e1 !important;*]()
+    [class*="text-slate-"] { color: #cbd5e1 !important; }
+    .text-slate-200, .text-slate-50 { color: #e6edf3 !important; }
+    h1, h2, h3 { color: #e6edf3 !important; letter-spacing: .2px; }
+
+    /* Glass cards */
+    .rounded-xl,
+    .bg-slate-900\/60, .bg-slate-900\/70, .bg-slate-900\/80 {
+      background: rgba(8,13,24,.72) !important;
+      border-color: rgba(148,163,184,.20) !important;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(3,7,18,.55), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    /* Small tiles */
+    .card, [class*="CardContent"] {
+      background: rgba(10,16,28,.78);
+      border: 1px solid rgba(148,163,184,.18);
+      box-shadow: 0 6px 16px rgba(2,6,23,.45);
+    }
+
+    /* Atlas nodes: hover + calm pulse */
+    #root svg circle { transition: transform .25s ease, filter .25s ease, opacity .25s ease; }
+    #root svg g:hover circle:first-of-type {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 10px rgba(34,211,238,.55));
+    }
+    #root svg circle[fill="#36D0C4"] { animation: nimbusPulse 3s ease-in-out infinite; }
+    @keyframes nimbusPulse {
+      0%, 100% { filter: drop-shadow(0 0 0 rgba(54,208,196,0)); }
+      50%      { filter: drop-shadow(0 0 12px rgba(54,208,196,.55)); }
+    }
+
+    /* Type clarity */
+    h1 { font-weight: 500; letter-spacing: .3px; }
+    h2 { font-weight: 500; letter-spacing: .25px; }
+    h3 { font-weight: 500; letter-spacing: .2px; }
+    .small, .text-xs { font-size: 12.5px !important; }
+    .text-sm { font-size: 14.5px !important; }
+    #root svg { font-size: 13px; }
+
+    /* Dividers + buttons */
+    hr, .border-t { border-top-color: rgba(148,163,184,.18) !important; opacity: 1; }
+    button, .btn, [class*="button"] { border-color: rgba(148,163,184,.28) !important; }
+
+    /* === Prototype legend bar: fixed overlay (no JS) === */
+    .nimbus-legend-bar{
+      position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 2147483647; /* sit above all app layers */
+      isolation: isolate; /* separate stacking context */
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+      padding: 10px 14px; border-radius: 14px;
+      background: rgba(6,10,19,.78);
+      border: 1px solid rgba(148,163,184,.22);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      color: #cbd5e1; font-size: 13px; line-height: 1.2;
+    }
+    .nimbus-legend-pill{ display:flex; align-items:center; gap:8px; white-space:nowrap; }
+    .nimbus-dot{ width:10px; height:10px; border-radius:9999px; display:inline-block; }
+    .nimbus-line{ width:28px; height:2px; background:#cbd5e1; opacity:.9; border-radius:2px; display:inline-block; }
+
+    @media (max-width:640px){
+      .nimbus-legend-bar{ left:12px; right:12px; bottom:12px; gap:12px; font-size:12.5px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Decorative backdrop -->
+  <div class="nimbus-backdrop" aria-hidden="true"></div>
+
+  <!-- React mounts here -->
+  <div id="root"></div>
+
+  <!-- Static, prototype-style legend (outside #root so React can’t touch it) -->
+  <div class="nimbus-legend-bar" role="note" aria-label="Legend">
+    <div class="nimbus-legend-pill"><span class="nimbus-dot" style="background:#36D0C4"></span><span>Calm</span></div>
+    <div class="nimbus-legend-pill"><span class="nimbus-dot" style="background:#E5B769"></span><span>Variable</span></div>
+    <div class="nimbus-legend-pill"><span class="nimbus-dot" style="background:#F87171"></span><span>Storm</span></div>
+    <div class="nimbus-legend-pill"><span class="nimbus-line"></span><span>Link thickness = symbolic mass</span></div>
+  </div>
+</body>
+</html>
