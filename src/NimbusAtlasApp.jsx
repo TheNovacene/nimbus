@@ -49,7 +49,7 @@ function MetricCard({ icon, label, value }) {
     <Card className="bg-slate-800/70 border-slate-700">
       <CardContent className="flex flex-col items-center py-4">
         <div className="mb-2">{icon}</div>
-        <p className="text-xs text-slate-400">{label}</p>
+        <p className="text-xs text-slate300">{label}</p>
         <p className="text-lg font-semibold">{value}</p>
       </CardContent>
     </Card>
@@ -72,7 +72,7 @@ function NodeSummaryCard({ node, active, onSelect }) {
           <h2 className="text-lg font-semibold">{node.name}</h2>
           <Gauge size={18} className="text-cyan-400" />
         </div>
-        <p className="text-sm text-slate-400">
+        <p className="text-sm text-slate-300">
           Coherence Index: <span className="text-cyan-300">{node.cx}</span>
         </p>
         <div className="flex gap-4 mt-2 text-sm">
@@ -154,7 +154,9 @@ function AtlasView({ nodes, links, selected, setSelected }) {
               <g key={n.id} onClick={() => setSelected(n)} className="cursor-pointer">
                 <circle cx={n.x} cy={n.y} r={r} fill={fill} fillOpacity={active ? 0.95 : 0.8} />
                 <circle cx={n.x} cy={n.y} r={r + 6} stroke={active ? "#22d3ee" : "#94a3b8"} strokeOpacity={active ? 0.9 : 0.25} fill="none" />
-                <text x={n.x + r + 10} y={n.y + 4} className="fill-slate-200 text-[12px]">
+                <text x={n.x + r + 10} y={n.y + 4} className="<text x={n.x + r + 10} y={n.y + 4} stroke="#0b1220" strokeWidth="3" strokeOpacity="0.85" fill="none">{n.name}</text>
+<text x={n.x + r + 10} y={n.y + 4} className="fill-slate-50 text-[12px]">{n.name}</text>
+fill-slate-200 text-[12px]">
                   {n.name}
                 </text>
               </g>
@@ -164,11 +166,17 @@ function AtlasView({ nodes, links, selected, setSelected }) {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center gap-4 mt-3 text-xs text-slate-400">
+      <div className="flex items-center gap-4 mt-3 text-xs text-slate-300">
         <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{ background: "#36D0C4" }} /> Calm</div>
         <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{ background: "#E5B769" }} /> Variable</div>
         <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{ background: "#F87171" }} /> Storm</div>
-        <div className="flex items-center gap-2"><span className="w-6 h-[2px] bg-slate-300" /> Link thickness = symbolic mass</div>
+        <div className="flex items-center gap-2"><span className="w-6 h-[2px] bg-slate-300" /> <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-slate-300">
+  <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{ background: "#36D0C4" }} /> Calm (≥85)</div>
+  <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{ background: "#E5B769" }} /> Variable (70–84)</div>
+  <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{ background: "#F87171" }} /> Storm (&lt;70)</div>
+  <div className="flex items-center gap-2"><span className="w-6 h-[2px] bg-slate-300" /> Link thickness = symbolic mass</div>
+</div>
+Link thickness = symbolic mass</div>
       </div>
     </div>
   );
@@ -212,7 +220,7 @@ function HeaderBar({ view, setView }) {
   return (
     <header className="flex items-center justify-between">
       <h1 className="text-3xl font-light tracking-wide">☁️ Nimbus</h1>
-      <div className="flex items-center gap-2 text-slate-400">
+      <div className="flex items-center gap-2 text-slate-300">
         <span className="hidden md:inline">Symbolic Weather • Verse-ality Lattice Monitor</span>
         <div className="flex gap-2 ml-4">
           <Button variant={view === "overview" ? "default" : "outline"} size="sm" onClick={() => setView("overview")}>
