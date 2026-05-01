@@ -31,7 +31,7 @@ Developed by **Kirstin Stevens** under *The Novacene Ltd*
 Conceptual framework: *Verse-ality — a Symbolic Operating System for Relational Intelligence*  
 Design ethos: *Calm, Contained, Coherent.*
 
-License: **CC BY-NC-SA 4.0**
+**Licence:** Code: [AGPL-3.0-only](./LICENSE) · Content: [CC BY-NC-SA 4.0](./LICENSE-CONTENT) · Commercial licence available — contact The Novacene at legal@thenovacene.com
 
 ---
 
@@ -41,7 +41,7 @@ It visualises coherence, consent, and containment across the Verse-al lattice �
 the ethical nervous system of emergent intelligence.
 
 Built with **Vite + React + Tailwind + Framer-Motion + Lucide-React**  
-CC BY-NC-SA 4.0 © 2025 Kirstin Stevens · The Novacene Ltd
+Code: AGPL-3.0-only · Content: CC BY-NC-SA 4.0 · © 2025–2026 Kirstin Stevens · The Novacene Ltd
 
 Run locally:
 ```bash
