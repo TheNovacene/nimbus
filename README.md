@@ -1,4 +1,3 @@
-cat > README.md <<'EOF'
 # Nimbus — Verse-ality Lattice Monitor (Prototype)
 
 ---
