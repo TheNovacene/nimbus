@@ -1,5 +1,5 @@
-import NimbusAtlasApp from "./NimbusAtlasApp.jsx";
+import NimbusApp from "./NimbusApp.jsx";
 
 export default function App() {
-  return <NimbusAtlasApp />;
+  return <NimbusApp />;
 }
