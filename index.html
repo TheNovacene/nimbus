@@ -11,6 +11,26 @@
       content="Nimbus is an instrumented overlay on the Open Provision Drawings: the live instrument reading of one provision's architecture. It monitors the institution, never the child."
     />
 
+    <!-- Force fresh HTML when we deploy a new build -->
+    <script>
+      (function enforceVersion() {
+        const VERSION = "5"; // bump this on each deploy
+        const h = window.location.hostname;
+        if (h === "localhost" || h === "127.0.0.1") return;
+        const p = new URL(window.location.href);
+        if (p.searchParams.get("v") !== VERSION) {
+          p.searchParams.set("v", VERSION);
+          // Avoid history junk; also defeats CDN and browser caches for HTML
+          window.location.replace(p.toString());
+        }
+      })();
+    </script>
+
+    <!-- Cache hints (HTML only; assets are hashed by Vite) -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
     <link rel="icon" type="image/svg+xml" href="/nimbus/vite.svg" />
 
     <!-- Fraunces + Inter — the same pairing as the OAP plates -->

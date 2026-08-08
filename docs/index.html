@@ -1,124 +1,59 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <base href="/nimbus/">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b1220" />
-  <title>Nimbus</title>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <base href="/nimbus/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf8f3" />
+    <title>Nimbus — the live weather of a digital school</title>
+    <meta
+      name="description"
+      content="Nimbus is an instrumented overlay on the Open Provision Drawings: the live instrument reading of one provision's architecture. It monitors the institution, never the child."
+    />
 
-  <!-- Force fresh HTML when we deploy a new build -->
-  <script>
-    (function enforceVersion() {
-      const VERSION = "4";                 // ⬅️ bump this on each deploy
-      const p = new URL(window.location.href);
-      if (p.searchParams.get("v") !== VERSION) {
-        p.searchParams.set("v", VERSION);
-        // Avoid history junk; also defeats CDN/browser caches for HTML
-        window.location.replace(p.toString());
+    <!-- Force fresh HTML when we deploy a new build -->
+    <script>
+      (function enforceVersion() {
+        const VERSION = "5"; // bump this on each deploy
+        const h = window.location.hostname;
+        if (h === "localhost" || h === "127.0.0.1") return;
+        const p = new URL(window.location.href);
+        if (p.searchParams.get("v") !== VERSION) {
+          p.searchParams.set("v", VERSION);
+          // Avoid history junk; also defeats CDN and browser caches for HTML
+          window.location.replace(p.toString());
+        }
+      })();
+    </script>
+
+    <!-- Cache hints (HTML only; assets are hashed by Vite) -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="icon" type="image/svg+xml" href="/nimbus/vite.svg" />
+
+    <!-- Fraunces + Inter — the same pairing as the OAP plates -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- Hard fallback: paper and ink, even if the stylesheet fails -->
+    <style>
+      html, body, #root { min-height: 100%; }
+      body {
+        margin: 0;
+        background: #faf8f3;
+        color: #1d1a2e;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       }
-    })();
-  </script>
-
-  <!-- Cache hints (HTML only; assets are hashed by Vite) -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/nimbus/vite.svg" />
-
-  <!-- Inter font -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Vite bundle (keep paths as-is from your build) -->
-  <script type="module" crossorigin src="/nimbus/assets/index-DU6uUfo0.js"></script>
-  <link rel="stylesheet" crossorigin href="/nimbus/assets/index-984FJjwG.css">
-
-  <!-- Hard fallback styles + prototype polish -->
-  <style>
-    html, body, #root { min-height: 100%; }
-    body {
-      margin: 0;
-      background: #0b1220;
-      color: #e6edf3;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-    }
-    .nimbus-backdrop {
-      position: fixed; inset: 0; pointer-events: none;
-      background:
-        radial-gradient(1200px 600px at 18% 12%, rgba(54,208,196,.08), transparent),
-        radial-gradient(1100px 700px at 82% 88%, rgba(126,83,212,.06), transparent),
-        linear-gradient(180deg, rgba(13,23,42,.55), rgba(13,23,42,.55));
-    }
-    #root svg text {
-      paint-order: stroke; stroke: #0b1220; stroke-width: 3; stroke-opacity: .8; fill: #f8fafc;
-    }
-    [class*="text-slate-"] { color: #cbd5e1 !important; }
-    .text-slate-200, .text-slate-50 { color: #e6edf3 !important; }
-    h1, h2, h3 { color: #e6edf3 !important; letter-spacing: .2px; }
-
-    .rounded-xl, .bg-slate-900\/60, .bg-slate-900\/70, .bg-slate-900\/80 {
-      background: rgba(8,13,24,.72) !important;
-      border-color: rgba(148,163,184,.20) !important;
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 10px 30px rgba(3,7,18,.55), inset 0 1px 0 rgba(255,255,255,.03);
-    }
-    .card, [class*="CardContent"] {
-      background: rgba(10,16,28,.78);
-      border: 1px solid rgba(148,163,184,.18);
-      box-shadow: 0 6px 16px rgba(2,6,23,.45);
-    }
-
-    #root svg circle { transition: transform .25s ease, filter .25s ease, opacity .25s ease; }
-    #root svg g:hover circle:first-of-type { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(34,211,238,.55)); }
-    #root svg circle[fill="#36D0C4"] { animation: nimbusPulse 3s ease-in-out infinite; }
-    @keyframes nimbusPulse { 0%,100%{filter:drop-shadow(0 0 0 rgba(54,208,196,0))} 50%{filter:drop-shadow(0 0 12px rgba(54,208,196,.55))} }
-
-    h1 { font-weight: 500; letter-spacing: .3px; }
-    h2 { font-weight: 500; letter-spacing: .25px; }
-    h3 { font-weight: 500; letter-spacing: .2px; }
-    .small, .text-xs { font-size: 12.5px !important; }
-    .text-sm { font-size: 14.5px !important; }
-    #root svg { font-size: 13px; }
-
-    hr, .border-t { border-top-color: rgba(148,163,184,.18) !important; opacity: 1; }
-    button, .btn, [class*="button"] { border-color: rgba(148,163,184,.28) !important; }
-
-    /* Prototype legend bar: fixed overlay (no DOM mutation) */
-    .nimbus-legend-bar{
-      position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 2147483647;
-      isolation: isolate;
-      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
-      padding: 10px 14px; border-radius: 14px;
-      background: rgba(6,10,19,.78);
-      border: 1px solid rgba(148,163,184,.22);
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      color: #cbd5e1; font-size: 13px; line-height: 1.2;
-    }
-    .nimbus-legend-pill{ display:flex; align-items:center; gap:8px; white-space:nowrap; }
-    .nimbus-dot{ width:10px; height:10px; border-radius:9999px; display:inline-block; }
-    .nimbus-line{ width:28px; height:2px; background:#cbd5e1; opacity:.9; border-radius:2px; display:inline-block; }
-
-    @media (max-width:640px){
-      .nimbus-legend-bar{ left:12px; right:12px; bottom:12px; gap:12px; font-size:12.5px; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="nimbus-backdrop" aria-hidden="true"></div>
-  <div id="root"></div>
-
-  <!-- Static, prototype-style legend -->
-  <div class="nimbus-legend-bar" role="note" aria-label="Legend">
-    <div class="nimbus-legend-pill"><span class="nimbus-dot" style="background:#36D0C4"></span><span>Calm</span></div>
-    <div class="nimbus-legend-pill"><span class="nimbus-dot" style="background:#E5B769"></span><span>Variable</span></div>
-    <div class="nimbus-legend-pill"><span class="nimbus-dot" style="background:#F87171"></span><span>Storm</span></div>
-    <div class="nimbus-legend-pill"><span class="nimbus-line"></span><span>Link thickness = symbolic mass</span></div>
-  </div>
-</body>
+    </style>
+    <script type="module" crossorigin src="/nimbus/assets/index-DSlKUpVS.js"></script>
+    <link rel="stylesheet" crossorigin href="/nimbus/assets/index-CubhxJ_c.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
