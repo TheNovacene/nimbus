@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+message: "If you use Nimbus, please cite it as below."
+title: "Nimbus: the live weather of a digital school"
+abstract: >-
+  An instrumented overlay on the Open Provision Drawings (OAP-001 The Digital
+  Premises, OAP-002 The Services Layer): the live instrument reading of one
+  provision's architecture. Rooms and seals are the primitives and the six
+  field-states of The Weather of Knowing describe the field, with three role
+  views — safeguarding lead, board, and an external inspection chamber that
+  cannot be locked from inside. Nimbus monitors the institution, never the
+  child: every tile describes a system, a connection, or an adult's
+  accountability. Prototype; telemetry is mocked.
+authors:
+  - family-names: Stevens
+    given-names: Kirstin
+  - name: "The Novacene Ltd"
+license: AGPL-3.0-only
+repository-code: "https://github.com/TheNovacene/nimbus"
+url: "https://thenovacene.github.io/nimbus/"
+type: software
+version: "2.0.0"
+keywords:
+  - safeguarding
+  - zero-trust
+  - alternative-provision
+  - ai-governance
+  - observability
+  - kcsie
+  - verse-ality
+references:
+  - type: article
+    title: "Relational Zero-Trust: Re-erecting the Premises at the Accountability Layer — An Open Drawing Convention for Online Provision"
+    authors:
+      - family-names: Stevens
+        given-names: Kirstin
+      - name: "The Novacene Ltd"
+    year: 2026
+    doi: "10.5281/zenodo.21846221"
+    publisher:
+      name: Zenodo
+  - type: article
+    title: "The Realms of Knowing: A Field-Based Framework for Epistemic Weather in Human and Hybrid Systems"
+    authors:
+      - family-names: Stevens
+        given-names: Kirstin
+      - name: "The Novacene Ltd"
+    year: 2025
+    doi: "10.5281/zenodo.17685811"
+    publisher:
+      name: Zenodo
