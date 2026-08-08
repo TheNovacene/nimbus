@@ -566,12 +566,39 @@ export default function NimbusApp() {
           <div className="flex flex-wrap items-baseline gap-[14px]">
             <h1 className="m-0 font-display text-[34px] font-semibold">Nimbus</h1>
             <span className="text-[12px] font-bold tracking-[2px] text-violet">
-              THE LIVE WEATHER OF A DIGITAL SCHOOL
+              THE LIVE{" "}
+              <a
+                href="https://glyphonics.com/weather-of-knowing.html"
+                target="_blank"
+                rel="noopener"
+                className="text-violet underline underline-offset-[3px]"
+              >
+                WEATHER
+              </a>{" "}
+              OF A DIGITAL SCHOOL
             </span>
           </div>
           <p className="m-0 mt-[6px] text-[13px] italic text-muted">
-            The same premises as OAP-001 / OAP-002 — instrumented. If it is not
-            drawn, it does not flow; if it flows anyway, Nimbus says so.
+            The same premises as{" "}
+            <a
+              href="https://github.com/TheNovacene/open-provision-drawings/blob/main/drawings/oap-001-the-digital-premises.png"
+              target="_blank"
+              rel="noopener"
+              className="text-violet underline underline-offset-2"
+            >
+              OAP-001
+            </a>{" "}
+            /{" "}
+            <a
+              href="https://github.com/TheNovacene/open-provision-drawings/blob/main/drawings/oap-002-the-services-layer.png"
+              target="_blank"
+              rel="noopener"
+              className="text-violet underline underline-offset-2"
+            >
+              OAP-002
+            </a>{" "}
+            — instrumented. If it is not drawn, it does not flow; if it flows
+            anyway, Nimbus says so.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-[10px]">

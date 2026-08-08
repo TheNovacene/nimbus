@@ -50,7 +50,7 @@ export const BEATS = [
     "classroom → the record via the non-return valve — data in, nothing back",
     "ok",
   ],
-  ["flare.valve.audit", "S2 · role-based condition verified at the corridor", "ok"],
+  ["flare.seal.check", "S2 · valve rule active at the corridor — holding", "ok"],
   ["consent.ledger.append", "a consent review logged at the site office", "ok"],
   ["flare.seal.check", "X2 · partners never reach the record — holding", "ok"],
 ];
@@ -279,7 +279,7 @@ export function buildModel(demo) {
         },
         {
           t: "09:12",
-          k: "route.observed",
+          k: "flare.route.observed",
           txt: "classroom AI touchpoint → the record — not in the drawing · seal X3 raised",
           tone: "alert",
         },
@@ -296,14 +296,26 @@ export function buildModel(demo) {
           tone: "warn",
         },
         {
+          t: "08:47",
+          k: "flare.signal.acknowledged",
+          txt: "the DSL responded — loop closed in 19 minutes · auditable",
+          tone: "ok",
+        },
+        {
           t: "08:31",
           k: "offboarding.incomplete",
           txt: "leavers’ door · one offboarding open at day 14 · two permissions still live",
           tone: "warn",
         },
         {
+          t: "08:28",
+          k: "flare.signal.routed",
+          txt: "band: operational-harm · urgency: high · routed to the DSL · disclosed to child: true — no words carried",
+          tone: "warn",
+        },
+        {
           t: "06:00",
-          k: "s7.access.probe",
+          k: "flare.probe.refused",
           txt: "inspection chamber refused an external test — must never lock from inside",
           tone: "alert",
         },
